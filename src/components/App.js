@@ -4,7 +4,6 @@ import CommentBox from "./CommentBox";
 const App = () => {
   return (
     <div>
-      App component
       <CommentBox />
       <CommentList />
     </div>
