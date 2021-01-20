@@ -1,10 +1,15 @@
 import React from "react";
 import { mount } from "enzyme";
 import CommentBox from "components/CommentBox";
-
+import Root from "../../Root";
 let wrapped = null;
+
 beforeEach(() => {
-  wrapped = mount(<CommentBox />);
+  wrapped = mount(
+    <Root>
+      <CommentBox />
+    </Root>
+  );
 });
 
 afterEach(() => {
@@ -37,8 +42,6 @@ describe("test events", () => {
     expect(wrapped.find("textarea").text()).toEqual("Test text");
     // https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/prop.html
     expect(wrapped.find("textarea").prop("value")).toEqual("Test text");
-    //https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/state.html
-    expect(wrapped.state("comment")).toEqual("Test text");
   });
 
   it("should empty text area after submit", () => {
@@ -46,6 +49,5 @@ describe("test events", () => {
     //simulate update component after setState()
     wrapped.update();
     expect(wrapped.find("textarea").text()).toEqual("");
-    expect(wrapped.state("comment")).toEqual("");
   });
 });
