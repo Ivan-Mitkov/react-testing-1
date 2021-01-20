@@ -39,7 +39,12 @@ it("should has a text area that users can type in", () => {
 });
 
 it("should empty text area after submit", () => {
-  wrapped.find("textarea").simulate("submit");
+  wrapped
+    .find("textarea")
+    .simulate("change", { target: { value: "Test text" } });
+  wrapped.update();
+
+  wrapped.find("form").simulate("submit");
   //simulate update component after setState()
   wrapped.update();
   expect(wrapped.find("textarea").text()).toEqual("");
