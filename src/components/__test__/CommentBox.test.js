@@ -20,33 +20,32 @@ it("should has a text area and a button", () => {
   expect(wrapped.find("button").length).toEqual(1);
 });
 
-it("should has a text area that users can type in", () => {
-  //find the text area
-  //simulate event https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/simulate.html
-  wrapped
-    .find("textarea")
-    .simulate("change", { target: { value: "Test text" } });
+describe("test events", () => {
+  beforeEach(() => {
+    //find the text area
+    //simulate event https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/simulate.html
+    wrapped
+      .find("textarea")
+      .simulate("change", { target: { value: "Test text" } });
 
-  //force component to update
-  // https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/update.html
-  wrapped.update();
-  //https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/text.html
-  expect(wrapped.find("textarea").text()).toEqual("Test text");
-  // https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/prop.html
-  expect(wrapped.find("textarea").prop("value")).toEqual("Test text");
-  //https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/state.html
-  expect(wrapped.state("comment")).toEqual("Test text");
-});
+    //force component to update
+    // https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/update.html
+    wrapped.update();
+  });
+  it("should has a text area that users can type in", () => {
+    //https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/text.html
+    expect(wrapped.find("textarea").text()).toEqual("Test text");
+    // https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/prop.html
+    expect(wrapped.find("textarea").prop("value")).toEqual("Test text");
+    //https://enzymejs.github.io/enzyme/docs/api/ReactWrapper/state.html
+    expect(wrapped.state("comment")).toEqual("Test text");
+  });
 
-it("should empty text area after submit", () => {
-  wrapped
-    .find("textarea")
-    .simulate("change", { target: { value: "Test text" } });
-  wrapped.update();
-
-  wrapped.find("form").simulate("submit");
-  //simulate update component after setState()
-  wrapped.update();
-  expect(wrapped.find("textarea").text()).toEqual("");
-  expect(wrapped.state("comment")).toEqual("");
+  it("should empty text area after submit", () => {
+    wrapped.find("form").simulate("submit");
+    //simulate update component after setState()
+    wrapped.update();
+    expect(wrapped.find("textarea").text()).toEqual("");
+    expect(wrapped.state("comment")).toEqual("");
+  });
 });
