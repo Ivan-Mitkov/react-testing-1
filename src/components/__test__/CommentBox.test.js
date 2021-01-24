@@ -19,10 +19,10 @@ afterEach(() => {
 
 //Using full DOM Rendering but can use static
 //https://enzymejs.github.io/enzyme/docs/api/mount.html
-it("should has a text area and a button", () => {
+it("should has a text area and two buttons", () => {
   //find html elements
   expect(wrapped.find("textarea").length).toEqual(1);
-  expect(wrapped.find("button").length).toEqual(1);
+  expect(wrapped.find("button").length).toEqual(2);
 });
 
 describe("test events", () => {
