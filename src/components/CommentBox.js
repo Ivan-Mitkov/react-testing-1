@@ -14,15 +14,21 @@ class CommentBox extends React.Component {
     this.props.saveComment(this.state.comment);
     this.setState({ comment: "" });
   };
+  handleFetch = () => {
+    this.props.fetchComments();
+  };
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h4>Add a Comment</h4>
-        <textarea value={this.state.comment} onChange={this.handleChange} />
-        <div>
-          <button>Submit</button>
-        </div>
-      </form>
+      <div>
+        <form onSubmit={this.handleSubmit}>
+          <h4>Add a Comment</h4>
+          <textarea value={this.state.comment} onChange={this.handleChange} />
+          <div>
+            <button>Submit</button>
+          </div>
+        </form>
+        <button onClick={this.handleFetch}>Fetch Comments</button>
+      </div>
     );
   }
 }
